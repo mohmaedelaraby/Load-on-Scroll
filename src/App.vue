@@ -1,26 +1,56 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<div class="page">
+ <h1>Task Load on Scroll</h1>
+ <section v-for="(item) in list_of_data" v-bind:key="item.id" class="container">
+ <h2>{{item.title}}</h2>
+ <p>{{item.body}}</p>
+ </section>
+</div>
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import axios from 'axios'
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+  data(){
+    return{
+      list_of_data:null,
+    }
+  },
+  
+  mounted () {
+    axios
+      .get('https://jsonplaceholder.typicode.com/posts?_page=1&_limit=10')
+      .then(response => (this.list_of_data = response.data)).catch(err=>console.log(err))
+  },
+  
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+*{
+   margin: 0px;
+}
+h1{
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+.page{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.container{
+  border: 1px solid red;
+  width: 30%;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 </style>
