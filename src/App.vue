@@ -28,10 +28,8 @@ export default {
 
   }
 ,
-  methods: {
-    scrolll(){
-      
-      const cards= document.querySelectorAll(".card");
+ updated(){
+   const cards= document.querySelectorAll(".card");
 
       const observer = new IntersectionObserver(entries=>{
         entries.forEach(entry=>{
@@ -43,8 +41,7 @@ export default {
         observer.observe(card);
         console.log("Card :",card);
       })
-    }
-  },
+ }
 
   
 }
@@ -61,7 +58,7 @@ h1{
 }
 .page{
   height: 100vh;
-  background-color: aqua;
+ 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,7 +74,7 @@ h1{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: 150ms;
+  transition: 1500ms;
   opacity: 0;
 }
 .card.show{
