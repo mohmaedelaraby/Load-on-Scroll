@@ -1,10 +1,10 @@
 <template>
 <div class="page">
  <h1>Task Load on Scroll</h1>
- <button @click="scrolll">Scroll</button>
- <section v-for="(item) in list_of_data" v-bind:key="item.id" class="card show">
+ <section v-for="(item,index) in list_of_data" v-bind:key="index" class="card">
  <h2>{{item.title}}</h2>
  <p>{{item.body}}</p>
+ 
  </section>
 </div>
 
