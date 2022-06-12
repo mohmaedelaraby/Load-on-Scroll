@@ -33,7 +33,6 @@ export default {
       const observer = new IntersectionObserver(entries=>{
         entries.forEach(entry=>{
           entry.target.classList.toggle("show",entry.isIntersecting)
-          //console.log("lc",lastC)
           if(entry.isIntersecting){
             //load just once
             observer.unobserve(entry.target)
@@ -121,11 +120,12 @@ h1{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: 800ms;
+  transition: 0.5s ease-in;
   opacity: 0;
 }
 .card.show{
-  transform: translateX(0);
+  transform: translateX(0.5);
+  transition: 0.5s ease-in;
   opacity: 1;
 }
 </style>
