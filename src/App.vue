@@ -44,40 +44,41 @@ export default {
       });
 
 
+        var counter = 2
+        var NewData = null
 
-      
-      const cardContainer = document.querySelector('.page')
-
-      const loadNewCards =()=>{
-        for(let i=0;i<10;i++){
-          const card =document.createElement('div');
-          const header= document.createElement("h2")
-          const parag= document.createElement("p")
-          const contentHeader = document.createTextNode("HI I'M HEADER")
-          const contentprg = document.createTextNode("HI I'M paragarpgh")
-          header.appendChild(contentHeader)
-          parag.appendChild(contentprg)
-          card.appendChild(header);
-          card.appendChild(parag);
-          card.classList.add("card")
-          observer.observe(card)
-         cardContainer.append(card)
-        }
+         const loadNewCards = async ()=>{
+            console.log("Counter :" ,counter)
+          
+        await axios
+      .get(`https://jsonplaceholder.typicode.com/posts?_page=${counter}&_limit=5`)
+      .then(response => {
+        NewData = response.data
+        console.log("DATA" ,NewData)
+        console.log("*************************")
+        }).catch(err=>console.log(err));
+        counter++
+        this.list_of_data =[...this.list_of_data,12]
+        console.log("PUSH" , NewData)
       }
 
+
       
-      const lastObserver = new IntersectionObserver ( entries=>{
+
+      
+      const lastObserver =  new IntersectionObserver ( entries=>
+      {
         const lastcard =entries[0];
         if(!lastcard.isIntersecting) 
         {
           return
-          }
-          
+        } 
         loadNewCards();
         lastObserver.unobserve(lastcard.target);
         
       },{
-        threshold:1
+        threshold:0,
+        root:null
       })
 
      
